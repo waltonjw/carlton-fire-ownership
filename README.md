@@ -44,7 +44,7 @@ Charred organic material has relatively low reflictivity on the visible spectrum
 
 The output of this remapping, used by the supervised classification:
 
-![Mapped Bands](./mapped_bands.png)
+![Mapped Bands](./data/mapped_bands.png)
 
 
 
