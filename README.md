@@ -63,13 +63,31 @@ In summary this tool performs the following tasks, using the classified burn sca
 4. Creates a feature class of burned properties and their respective owners by intersecting the burn footprint with the land ownership feature class.
 5. Summarizes the area burned by owner/manager by using the tabulate area tool.   This can then be used to create a summary pie chart in the map document.
 
-
-
 ## Results
+
+The automated tool creates the following polygon feature class.   This feature class includes burn footprint and the owner of each affected parcel.   Overlaying this on a topographic map gives useful context.
+
+
+
+![](./data/burned_parcels.png)
+
+
+
+In addition to this feature class, a summary table is also generated which totals the burned acres by manager.   This is useful for reporting and graphs.
+
+
+
+![](./data/burned_properties_summary.png)
+
+
+
+Lastly, a one-page layout is created to package and present this information, including a horizontal bar graph to help the reader compare acreage totals.
+
+![](C:./data/exported_map.png)
 
 ## Conclusions
 
 Several interesting issues arose from this project.   The first issue needs further investigation and follow-up.
 
-1. Fire management officials concluded that the 2014 Carlton Complex Fire burned approximately 256,000 acres.   This analysis only found approximately 178,000 acres of charred organic material.   Most likely the difference results from areas which were deemed 'burned' but did not have noticable charred material detected by high reflectivity in the shortband-infrared band.   A very interesting follow-up project might be to understand how officials arrived at the 256,000 acres figure.  Likely some sort of footprint generalization is included in the official statistic.   A parcel with minimal vegetation should still be considered 'burned' when a wildfire sweeps through.
+1. Fire management officials concluded that the 2014 Carlton Complex Fire burned approximately 256,000 acres.   This analysis only found approximately 178,000 acres of charred organic material.   Most likely the difference results from areas which were deemed 'burned' but did not have noticeable charred material detected by high reflectivity in the short wave infrared band.   A very interesting follow-up project might be to understand how officials arrived at the 256,000 acres figure.  Likely some sort of footprint generalization is performed which fills holes and accounts for areas within the footprint which have no organic material and thus no charred reflectivity.    A parcel with minimal vegetation should still be considered 'burned' when a wildfire sweeps through.
 2. Many different land managers suffered losses in this fire.   While this may be obvious to those in the firefighting profession, it is a reminder that coordination between local, state, federal, private, and tribal agencies is important for the prevention, suppression, and recovery from wildfires.
