@@ -1,8 +1,5 @@
 # The 2014 Carlton Complex Fire - An Ownership Analysis
 
-
-[TOC]
-
 ## Introduction
 
 This GIS project was completed as an assignment in course #4 of the [UC Davis/Coursera GIS Certificate](https://cpe.ucdavis.edu/section/geographic-information-systems-gis-specialization-coursera) program, [Imagery, Automation, and Applications](https://www.coursera.org/learn/gis-applications?specialization=gis).  The goal of the project was to demonstrate fundamental ArcGIS skills in the areas of remote sensing analysis, classification, dataset correlation, and building and executing automated tools.
