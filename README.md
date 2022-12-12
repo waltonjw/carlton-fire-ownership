@@ -80,7 +80,7 @@ The automated tool creates the following polygon feature class.   This feature c
 
 The "Burned Properties" feature class has manually-added symbology:
 
-![](C:\Users\Jon Walton\Documents\GitHub\carlton-fire-ownership\images\legend.png)
+![](./images/legend.png)
 
 
 
