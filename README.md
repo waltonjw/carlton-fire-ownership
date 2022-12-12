@@ -1,5 +1,10 @@
 # The 2014 Carlton Complex Fire - An Ownership Analysis
+
+
+[TOC]
+
 ## Introduction
+
 This GIS project was completed as an assignment in course #4 of the [UC Davis/Coursera GIS Certificate](https://cpe.ucdavis.edu/section/geographic-information-systems-gis-specialization-coursera) program, [Imagery, Automation, and Applications](https://www.coursera.org/learn/gis-applications?specialization=gis).  The goal of the project was to demonstrate fundamental ArcGIS skills in the areas of remote sensing analysis, classification, dataset correlation, and building and executing automated tools.
 
 ## Background
@@ -41,19 +46,19 @@ Charred organic material has relatively low reflictivity on the visible spectrum
 | 4 / Red | Blue  |
 
 Prior to band mapping, the standard Landsat 8 pass does not easily identify the burn scar:
-![Unmapped Bands](./data/raw_bands.png)
+![Unmapped Bands](./images/raw_bands.png)
 
 Once bands are remapped pursuant to the table above, the burn scar becomes readily visible.  The bright magenta area in the bottom of the raster represents the charred organic material and this transformed Landsat 8 pass is now ready for supervised classification:
-![Mapped Bands](./data/mapped_bands.png)
+![Mapped Bands](./images/mapped_bands.png)
 
 #### Burn Scar Classification
 
 Using the Supervised Classification feature of ArcMap, a new raster is created which contains a classification for charred organic material, denoted in red below.   Note that other satellite fires are also shown.    Most of these were a result of wind-blown embers, although it can also be assumed that in a fire-prone area, these could be smaller fires which occurred at a prior time.
-![Classified Burn Scar](./data/classified_scar.png)
+![Classified Burn Scar](./images/classified_scar.png)
 
 ### Parcel Identification Workflow
 Parcel feature classes and the classified raster are now ready to be used as input parameters into the automated workflow which reports the various property owners and the respective acres burned in the Carlton Complex Fire.   This user-generated tool has been included in the repository for reference.
-![Burn Scarn Analysis Tool](./data/burn_scar_analysis_tool.png)
+![Burn Scarn Analysis Tool](./images/burn_scar_analysis_tool.png)
 
 In summary this tool performs the following tasks, using the classified burn scar raster, parcel feature class, and general fire area feature class as input parameters.
 
@@ -69,7 +74,13 @@ The automated tool creates the following polygon feature class.   This feature c
 
 
 
-![](./data/burned_parcels.png)
+![](./images/burned_parcels.png)
+
+
+
+The "Burned Properties" feature class has manually-added symbology:
+
+![](C:\Users\Jon Walton\Documents\GitHub\carlton-fire-ownership\images\legend.png)
 
 
 
@@ -77,17 +88,37 @@ In addition to this feature class, a summary table is also generated which total
 
 
 
-![](./data/burned_properties_summary.png)
+![](./images/burned_properties_summary.png)
 
 
 
 Lastly, a one-page layout is created to package and present this information, including a horizontal bar graph to help the reader compare acreage totals.
 
-![](C:./data/exported_map.png)
+![](./images/exported_map.png)
+
+
+
+## Project Artifacts
+
+An exported map and a full map package are available in the [arcmap](./arcmap) directory of this project.  
+
+The map package is also available on [ArcGIS Online](https://www.arcgis.com/home/item.html?id=af7f3cbbec0e44ac974ecde214e01bd5)
+
+Source data can be accessed as S3 objects in the project bucket:
+
+[Landsat 8 raster](https://carlton-complex-fire.s3.us-west-2.amazonaws.com/LC08_L2SP_045026_20140731_20200911_02_T1.tar)
+
+[WA state boundary](https://carlton-complex-fire.s3.us-west-2.amazonaws.com/WA_State_Bndy.zip)
+
+[DNR-managed parcels](https://carlton-complex-fire.s3.us-west-2.amazonaws.com/WA_DNR_Managed_Land_Parcels.zip)
+
+[Non-DNR managed parcels](https://carlton-complex-fire.s3.us-west-2.amazonaws.com/state_ndmpl.zip)
+
+
 
 ## Conclusions
 
 Several interesting issues arose from this project.   The first issue needs further investigation and follow-up.
 
-1. Fire management officials concluded that the 2014 Carlton Complex Fire burned approximately 256,000 acres.   This analysis only found approximately 178,000 acres of charred organic material.   Most likely the difference results from areas which were deemed 'burned' but did not have noticeable charred material detected by high reflectivity in the short wave infrared band.   A very interesting follow-up project might be to understand how officials arrived at the 256,000 acres figure.  Likely some sort of footprint generalization is performed which fills holes and accounts for areas within the footprint which have no organic material and thus no charred reflectivity.    A parcel with minimal vegetation should still be considered 'burned' when a wildfire sweeps through.
+1. Fire management officials concluded that the 2014 Carlton Complex Fire burned approximately 256,000 acres.   This analysis only found approximately 178,000 acres of charred organic material.   Most likely this difference results from areas which were deemed 'burned' but did not have noticeable charred material detected by high reflectivity in the short wave infrared band.   An interesting follow-up project might be to understand how officials arrived at the 256,000 acres figure.  Likely some sort of footprint generalization is performed which fills holes and accounts for areas within the footprint which have no organic material and thus no charred reflectivity.   This might be achieved by adding a raster calculator step to fill in holes which lack charred organic matter but are still part of the burn scar.   A parcel with minimal vegetation should still be considered 'burned' when a wildfire sweeps through.
 2. Many different land managers suffered losses in this fire.   While this may be obvious to those in the firefighting profession, it is a reminder that coordination between local, state, federal, private, and tribal agencies is important for the prevention, suppression, and recovery from wildfires.
