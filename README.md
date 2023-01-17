@@ -13,18 +13,29 @@ From July 14 to August 24, 2014, one of the largest fires in Washington State hi
 
 This project aims to identify the final destructive footprint of the fire and analyze the ownership of the land affected by the fire.  A project like this might be used for future fires to assist with coordination, cleanup, restoration, and prevention.  The project is designed to allow for any Landsat 8 imagary and is runtime-configurable so future Washington State fires can be analyzed.
 
-## Methodology
-Using Landsat 8 imagery acquired shortly after the fire, ArcMap supervised classification is used to identify the final footprint of the fire, as well as surrounding non-affected land and its associated type.   An automated workflow joins land ownership feature classes from the Washington State Department of Natural Resources in order to identify and quantify ownership of the land affected by the fire.
 
-All processing steps are placed inside an automated workflow, which allows for any Washington State wildfire to be analyzed using this tool, utilizing user-modifiable runtime parameters. 
 
-### Data Sources
+## Data Sources
 Land ownership datasets are retrieved from the [Washington State DNR](https://data-wadnr.opendata.arcgis.com/).  Additionally, a simple Washington State boundary is used to constrain analysis of the Landsat 8 imagery.  All datasets are available as linked below.
-* [WA DNR Managed Land Parcels](https://data-wadnr.opendata.arcgis.com/documents/wadnr::wa-dnr-managed-land-parcels-download/about) feature class
-* [WA Major Public Lands (non-DNR)](https://data-wadnr.opendata.arcgis.com/documents/wadnr::wa-major-public-lands-non-dnr-download/about) feature class
-* [Washington State Boundary](https://data-wadnr.opendata.arcgis.com/documents/wadnr::wa-state-boundary-download/about) feature class
+
+| Data Source                                                 | URL                                                          | Purpose                                                      |
+| ----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Washington State DNR Managed Parcels feature class          | https://data-wadnr.opendata.arcgis.com/documents/wadnr::wa-dnr-managed-land-parcels-download/about | Identify DNR-managed parcels.                                |
+| Washington State Major Public Lands (Non-DNR) feature class | https://data-wadnr.opendata.arcgis.com/documents/wadnr::wa-major-public-lands-non-dnr-download/about | Identify non-DNR-managed parcels.                            |
+| WA DNR Boundary                                             | https://data-wadnr.opendata.arcgis.com/datasets/wadnr::wa-state-boundary | Washington State boundary polygon for constraining overall analysis. |
+| Landsat 8 Raster 45/26 / 7/31/2014                          | https://earthexplorer.usgs.gov/                              | Identify Burn Scar                                           |
+
+
 
 A [Landsat 8](https://earthexplorer.usgs.gov/) 45/26 pass on 7/31/2014 provided a cloud free image of the freshly charred organic material.   This date represents a point in time which the fire footprint had nearly reached its final size and the 7/31/2014 pass provides a remarkably unobstructed view of the region.    Some subjective evaluation was done on the Earth Explorer site to find the candidate raster.   Subsequent passes in August and September did not provide such a clear view.   The footprint at next pass after the fully contained date of 8/24/2014 very closely matches the footprint of 7/31/2014, so this earlier date was chosen for the purpose of this project.    While the fire footprint is near the edge of this particular Landsat 8 raster, it did not extend into the next raster to any significant degree, so no mosaic processing was required.
+
+
+
+## Methodology
+
+Using Landsat 8 imagery acquired shortly after the fire, ArcMap supervised classification is used to identify the final footprint of the fire, as well as surrounding non-affected land and its associated type.   An automated workflow joins land ownership feature classes from the Washington State Department of Natural Resources in order to identify and quantify ownership of the land affected by the fire.
+
+All processing steps are placed inside a model workflow, which allows for any wildfire to be analyzed using this tool, utilizing user-modifiable runtime parameters. 
 
 ### Data Preparation
 #### Parcel Ownership Feature Classes
@@ -33,7 +44,7 @@ A [Landsat 8](https://earthexplorer.usgs.gov/) 45/26 pass on 7/31/2014 provided 
 3. The erase tool was used to generate a new feature class ‘private lands’ – all land which is within Washington state that is not part of the government_lands feature class.
 4. Finally, the merge tool was used again to merge the government_lands and private_lands feature classes into an all_wa_lands feature class that contains land ownership information for the entire state in a standardized format.  Again the field calculator was used to statically populate ‘Private’ in the OWNER and MANAGER fields of the new private land records.  This is a reusable feature class which can be used for all future Washington State fires.
 
-For reference, these feature classes generated in the data prepraration phase are included in this git repository.
+
 
 #### Burn Scar Raster Band Mapping
 Charred organic material has relatively low reflictivity on the visible spectrum, but rather high reflectivity in the short-wave infrared.  Additionally, healthy vegetation has a rather high reflectivity in the near infrared.  Remapping Landsat 8 bands as follows will result in the burn scar showing up as a highly distinct magenta, and healthy vegegation a distinct green, which will greatly assist in raster classification:
@@ -99,19 +110,8 @@ Lastly, a one-page layout is created to package and present this information, in
 
 ## Project Artifacts
 
-An exported map and a full map package are available in the [arcmap](./arcmap) directory of this project.  
-
-The map package is also available on [ArcGIS Online](https://www.arcgis.com/home/item.html?id=af7f3cbbec0e44ac974ecde214e01bd5)
-
-Source data can be accessed as S3 objects in the project bucket:
-
-[Landsat 8 raster](https://carlton-complex-fire.s3.us-west-2.amazonaws.com/LC08_L2SP_045026_20140731_20200911_02_T1.tar)
-
-[WA state boundary](https://carlton-complex-fire.s3.us-west-2.amazonaws.com/WA_State_Bndy.zip)
-
-[DNR-managed parcels](https://carlton-complex-fire.s3.us-west-2.amazonaws.com/WA_DNR_Managed_Land_Parcels.zip)
-
-[Non-DNR managed parcels](https://carlton-complex-fire.s3.us-west-2.amazonaws.com/state_ndmpl.zip)
+- The custom geoprocessing model, exported PDF map, and a map package are available in the [arcmap](./arcmap) directory of this github project.  
+- A web map of the final results is available on [ArcGIS Online](https://www.arcgis.com/home/item.html?id=25e17d34f4f7475ba6cadfa7c6e26b0a)
 
 
 
