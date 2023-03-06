@@ -1,10 +1,16 @@
 # The 2014 Carlton Complex Fire - An Ownership Analysis
 
+Jon Walton
 
+Geographic Information Systems (GIS) Specialization, *Imagery, Automation, and Applications*
+
+UC Davis/Coursera, March 13, 2021
+
+[GitHub](https://github.com/waltonjw/carlton-fire-ownership)
 
 ## Introduction
 
-This GIS project was completed as an assignment in course #4 of the [UC Davis/Coursera GIS Certificate](https://cpe.ucdavis.edu/section/geographic-information-systems-gis-specialization-coursera) program, [Imagery, Automation, and Applications](https://www.coursera.org/learn/gis-applications?specialization=gis).  The goal of the project was to demonstrate fundamental ArcGIS skills in the areas of remote sensing analysis, classification, dataset correlation, and building and executing automated tools.
+This GIS project was completed as an open-ended assignment in course #4 of the [UC Davis/Coursera GIS Certificate](https://cpe.ucdavis.edu/section/geographic-information-systems-gis-specialization-coursera) program, [Imagery, Automation, and Applications](https://www.coursera.org/learn/gis-applications?specialization=gis).  The goal of the project was to demonstrate fundamental ArcGIS skills in the areas of remote sensing analysis, classification, dataset correlation, and building and executing automated models. 
 
 ## Background
 The Methow Valley, situated in the north-central portion of Washington State, is a picturesque rural area, supported largely by agricultural, recreational, and tribal industries.  With a climate classification of dry-summer humid continental, the region only receives 12 inches of rain per year, far less than the Washington State average of 38 inches per year.   Situated on the drier side of the Cascade Mountains,  it is one of the more wildfire-prone regions of the state.
@@ -12,8 +18,6 @@ The Methow Valley, situated in the north-central portion of Washington State, is
 From July 14 to August 24, 2014, one of the largest fires in Washington State history ripped through the area, leaving over a quarter million acres burned and hundreds of homes, businesses, farms, and ranches destroyed.   Tragically, two people were killed as a result of the wildfire.
 
 This project aims to identify the final destructive footprint of the fire and analyze the ownership of the land affected by the fire.  A project like this might be used for future fires to assist with coordination, cleanup, restoration, and prevention.  The project is designed to allow for any Landsat 8 imagary and is runtime-configurable so future Washington State fires can be analyzed.
-
-
 
 ## Data Sources
 Land ownership datasets are retrieved from the [Washington State DNR](https://data-wadnr.opendata.arcgis.com/).  Additionally, a simple Washington State boundary is used to constrain analysis of the Landsat 8 imagery.  All datasets are available as linked below.
@@ -25,11 +29,7 @@ Land ownership datasets are retrieved from the [Washington State DNR](https://da
 | WA DNR Boundary                                             | https://data-wadnr.opendata.arcgis.com/datasets/wadnr::wa-state-boundary | Washington State boundary polygon for constraining overall analysis. |
 | Landsat 8 Raster 45/26 / 7/31/2014                          | https://earthexplorer.usgs.gov/                              | Identify Burn Scar                                           |
 
-
-
 A [Landsat 8](https://earthexplorer.usgs.gov/) 45/26 pass on 7/31/2014 provided a cloud free image of the freshly charred organic material.   This date represents a point in time which the fire footprint had nearly reached its final size and the 7/31/2014 pass provides a remarkably unobstructed view of the region.    Some subjective evaluation was done on the Earth Explorer site to find the candidate raster.   Subsequent passes in August and September did not provide such a clear view.   The footprint at next pass after the fully contained date of 8/24/2014 very closely matches the footprint of 7/31/2014, so this earlier date was chosen for the purpose of this project.    While the fire footprint is near the edge of this particular Landsat 8 raster, it did not extend into the next raster to any significant degree, so no mosaic processing was required.
-
-
 
 ## Methodology
 
@@ -43,8 +43,6 @@ All processing steps are placed inside a model workflow, which allows for any wi
 2. Using the merge tool, a new feature class ‘government lands’ was created by merging the two parcel ownership feature classes.   The field calculator was then used to statically populate the OWNER and MANAGER fields of this feature class for all DNR records.
 3. The erase tool was used to generate a new feature class ‘private lands’ – all land which is within Washington state that is not part of the government_lands feature class.
 4. Finally, the merge tool was used again to merge the government_lands and private_lands feature classes into an all_wa_lands feature class that contains land ownership information for the entire state in a standardized format.  Again the field calculator was used to statically populate ‘Private’ in the OWNER and MANAGER fields of the new private land records.  This is a reusable feature class which can be used for all future Washington State fires.
-
-
 
 #### Burn Scar Raster Band Mapping
 Charred organic material has relatively low reflictivity on the visible spectrum, but rather high reflectivity in the short-wave infrared.  Additionally, healthy vegetation has a rather high reflectivity in the near infrared.  Remapping Landsat 8 bands as follows will result in the burn scar showing up as a highly distinct magenta, and healthy vegegation a distinct green, which will greatly assist in raster classification:
@@ -106,14 +104,10 @@ Lastly, a one-page layout is created to package and present this information, in
 
 ![](./images/exported_map.png)
 
-
-
 ## Project Artifacts
 
-- The custom geoprocessing model, exported PDF map, and a map package are available in the [arcmap](./arcmap) directory of this github project.  
+- The custom geoprocessing model, exported PDF map, and a map package are available in the [arcmap](https://github.com/waltonjw/carlton-fire-ownership/tree/main/arcmap) directory of the associated GitHub project noted at the top of this document.
 - A web map of the final results is available on [ArcGIS Online](https://www.arcgis.com/home/item.html?id=25e17d34f4f7475ba6cadfa7c6e26b0a)
-
-
 
 ## Conclusions
 
