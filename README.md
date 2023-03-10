@@ -6,7 +6,7 @@ Geographic Information Systems (GIS) Specialization, *Imagery, Automation, and A
 
 UC Davis/Coursera, March 13, 2021
 
-[GitHub](https://github.com/waltonjw/carlton-fire-ownership)
+[Project on GitHub](https://github.com/waltonjw/carlton-fire-ownership)
 
 ## Introduction
 
@@ -27,7 +27,7 @@ Land ownership datasets are retrieved from the [Washington State DNR](https://da
 | Washington State DNR Managed Parcels feature class          | https://data-wadnr.opendata.arcgis.com/documents/wadnr::wa-dnr-managed-land-parcels-download/about | Identify DNR-managed parcels.                                |
 | Washington State Major Public Lands (Non-DNR) feature class | https://data-wadnr.opendata.arcgis.com/documents/wadnr::wa-major-public-lands-non-dnr-download/about | Identify non-DNR-managed parcels.                            |
 | WA DNR Boundary                                             | https://data-wadnr.opendata.arcgis.com/datasets/wadnr::wa-state-boundary | Washington State boundary polygon for constraining overall analysis. |
-| Landsat 8 Raster 45/26 / 7/31/2014                          | https://earthexplorer.usgs.gov/                              | Identify Burn Scar                                           |
+| Landsat 8 Raster 45/26 - 7/31/2014                          | https://earthexplorer.usgs.gov/                              | Identify Burn Scar                                           |
 
 A [Landsat 8](https://earthexplorer.usgs.gov/) 45/26 pass on 7/31/2014 provided a cloud free image of the freshly charred organic material.   This date represents a point in time which the fire footprint had nearly reached its final size and the 7/31/2014 pass provides a remarkably unobstructed view of the region.    Some subjective evaluation was done on the Earth Explorer site to find the candidate raster.   Subsequent passes in August and September did not provide such a clear view.   The footprint at next pass after the fully contained date of 8/24/2014 very closely matches the footprint of 7/31/2014, so this earlier date was chosen for the purpose of this project.    While the fire footprint is near the edge of this particular Landsat 8 raster, it did not extend into the next raster to any significant degree, so no mosaic processing was required.
 
