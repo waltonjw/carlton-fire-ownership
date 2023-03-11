@@ -4,7 +4,7 @@ Jon Walton
 
 Geographic Information Systems (GIS) Specialization, *Imagery, Automation, and Applications*
 
-UC Davis/Coursera, March 13, 2021
+UC Davis/Coursera, December 15, 2021
 
 [Project on GitHub](https://github.com/waltonjw/carlton-fire-ownership)
 
